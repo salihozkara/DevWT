@@ -1,0 +1,47 @@
+{
+  "manifest_version": 3,
+  "name": "DevWT Gateway",
+  "description": "Select the DevWT context used by the localhost gateway without changing the browser URL.",
+  "version": "0.3.22",
+  "action": {
+    "default_title": "DevWT Gateway",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://localhost/*",
+        "https://localhost/*",
+        "http://127.0.0.1/*",
+        "https://127.0.0.1/*",
+        "http://[::1]/*",
+        "https://[::1]/*"
+      ],
+      "js": [
+        "tab-title.js",
+        "routing-notice.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [
+    "declarativeNetRequestWithHostAccess",
+    "storage",
+    "tabGroups",
+    "tabs",
+    "webNavigation"
+  ],
+  "host_permissions": [
+    "http://127.0.0.1:17776/*",
+    "ws://127.0.0.1:17776/*",
+    "http://localhost/*",
+    "https://localhost/*",
+    "http://127.0.0.1/*",
+    "https://127.0.0.1/*",
+    "http://[::1]/*",
+    "https://[::1]/*"
+  ]
+}

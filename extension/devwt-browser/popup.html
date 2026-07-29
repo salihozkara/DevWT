@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DevWT Gateway</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main>
+    <header class="app-header">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">DW</span>
+        <div>
+          <h1>DevWT Gateway</h1>
+          <p id="tab-summary">Loading localhost context...</p>
+        </div>
+      </div>
+      <button id="refresh" class="icon-button" type="button" title="Refresh" aria-label="Refresh contexts">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20 11a8 8 0 1 0-2.34 5.66M20 4v7h-7"></path>
+        </svg>
+      </button>
+    </header>
+
+    <section class="search-panel" aria-label="Context search">
+      <label class="search-field" for="context-search">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="m20 20-4-4"></path>
+        </svg>
+        <input
+          id="context-search"
+          type="search"
+          aria-label="Search contexts"
+          placeholder="Search contexts, branches, paths..."
+          autocomplete="off"
+          spellcheck="false">
+        <kbd>/</kbd>
+      </label>
+      <div class="search-meta">
+        <span id="results-summary">Loading contexts...</span>
+        <button id="clear-search" class="text-button" type="button" hidden>Clear search</button>
+      </div>
+    </section>
+
+    <details class="settings">
+      <summary>
+        <span class="summary-label">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"></path>
+            <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.83 2.83-.06-.06A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1 .6 1.7 1.7 0 0 0-.4 1.1V21h-4v-.09A1.7 1.7 0 0 0 8.6 19.4a1.7 1.7 0 0 0-1.88.34l-.06.06-2.83-2.83.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-.6-1 1.7 1.7 0 0 0-1.1-.4H3v-4h.09A1.7 1.7 0 0 0 4.6 8.6a1.7 1.7 0 0 0-.34-1.88l-.06-.06 2.83-2.83.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-.6 1.7 1.7 0 0 0 .4-1.1V3h4v.09A1.7 1.7 0 0 0 15.4 4.6a1.7 1.7 0 0 0 1.88-.34l.06-.06 2.83 2.83-.06.06A1.7 1.7 0 0 0 19.4 9c.11.38.32.73.6 1 .29.27.68.42 1.1.4h.09v4h-.09c-.42-.02-.81.13-1.1.4-.28.27-.49.62-.6 1Z"></path>
+          </svg>
+          Preferences
+        </span>
+        <span class="summary-hint">2 options</span>
+      </summary>
+      <div class="settings-body">
+        <label class="setting-row" for="group-tabs">
+          <span class="setting-copy">
+            <strong>Group tabs by context</strong>
+            <small>Dragging a tab into a group switches its context.</small>
+          </span>
+          <input id="group-tabs" type="checkbox">
+        </label>
+        <label class="setting-row" for="show-tab-title">
+          <span class="setting-copy">
+            <strong>Show context in tab title</strong>
+            <small>Prefix the page title with description or branch.</small>
+          </span>
+          <input id="show-tab-title" type="checkbox">
+        </label>
+      </div>
+    </details>
+
+    <section id="status" class="notice">
+      <span class="notice-dot" aria-hidden="true"></span>
+      <span id="status-text">Connecting to DevWT...</span>
+    </section>
+    <section id="routes" class="routes"></section>
+
+    <footer>
+      <button id="clear" class="secondary-button" type="button">Clear active worktree</button>
+      <a href="http://127.0.0.1:17776/" target="_blank" rel="noreferrer">
+        DevWT Console
+        <span aria-hidden="true">↗</span>
+      </a>
+    </footer>
+  </main>
+  <script src="popup.js"></script>
+</body>
+</html>

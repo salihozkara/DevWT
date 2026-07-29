@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Devwt.Cli/Devwt.Cli.csproj" />
+    <Project Path="src/Devwt.Core/Devwt.Core.csproj" />
+    <Project Path="src/Devwt.Service/Devwt.Service.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Devwt.Core.Tests/Devwt.Core.Tests.csproj" />
+    <Project Path="tests/Devwt.Service.Tests/Devwt.Service.Tests.csproj" />
+  </Folder>
+</Solution>

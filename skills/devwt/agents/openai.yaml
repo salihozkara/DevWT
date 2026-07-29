@@ -1,0 +1,4 @@
+interface:
+  display_name: "DevWT"
+  short_description: "Route registered DevWT worktree traffic"
+  default_prompt: "Use $devwt only if this repository or application is registered with DevWT, then route the task to its correct context."

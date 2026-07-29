@@ -1,0 +1,11 @@
+*.cs text eol=crlf
+*.csproj text eol=crlf
+*.slnx text eol=crlf
+*.md text eol=lf
+*.c text eol=lf
+*.h text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.ps1 text eol=crlf
+*.cmd text eol=crlf
+LICENSE text eol=lf
