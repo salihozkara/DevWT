@@ -1,0 +1,67 @@
+name: Bug report
+description: Report a reproducible DevWT problem.
+title: "[bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Include `devwt status` output when possible. Do not paste private repository paths, secrets, keys, or connection strings.
+  - type: input
+    id: version
+    attributes:
+      label: DevWT version or commit
+      placeholder: v0.1.0-preview.1 or commit SHA
+    validations:
+      required: true
+  - type: input
+    id: windows
+    attributes:
+      label: Windows version
+      placeholder: Windows 11 25H2 build ...
+    validations:
+      required: true
+  - type: dropdown
+    id: install-mode
+    attributes:
+      label: Install mode
+      options:
+        - Source checkout
+        - Installer bundle
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+      placeholder: |
+        1. Register context ...
+        2. Start service ...
+        3. Run app ...
+    validations:
+      required: true
+  - type: textarea
+    id: status
+    attributes:
+      label: devwt status output
+      render: text
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety checks
+      options:
+        - label: I removed private paths, secrets, keys, tokens, and connection strings from this report.
+          required: true

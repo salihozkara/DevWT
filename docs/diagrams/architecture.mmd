@@ -1,0 +1,20 @@
+flowchart LR
+    Dev["Developer tools<br/>dotnet · node · IDE"] --> Hook["User-mode hook runtime"]
+    Hook --> Backends["Per-worktree backend ports"]
+
+    Browser["Chrome / Edge<br/>DevWT extension"] --> Gateway["Localhost gateway"]
+    Console["Web Console<br/>routing controls"] --> Policy["Routing state"]
+    Policy --> Gateway
+    Backends --> Gateway
+
+    Gateway --> Decision{"Context decision"}
+    Decision --> Checkout["checkout worktree"]
+    Decision --> Catalog["catalog worktree"]
+    Decision --> Auth["auth worktree"]
+
+    classDef blue fill:#e8f1ff,stroke:#2563eb,color:#0f172a;
+    classDef green fill:#eafbf4,stroke:#10b981,color:#0f172a;
+    classDef dark fill:#13213c,stroke:#60a5fa,color:#ffffff;
+    class Browser,Console blue;
+    class Dev,Hook,Backends green;
+    class Gateway,Policy,Decision dark;

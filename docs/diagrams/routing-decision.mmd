@@ -1,0 +1,23 @@
+flowchart TD
+    Request["Localhost request"] --> Candidates{"Matching worktree listeners"}
+    Candidates -->|One| Single["Use the single target"]
+    Candidates -->|Multiple| Explicit["Explicit request context"]
+    Explicit -->|No match| Browser["Browser tab target"]
+    Browser -->|No match| Caller["Listener, process, session,<br/>and ancestor context"]
+    Caller -->|No match| Cookie["Context cookie"]
+    Cookie -->|No match| Image["Application image target"]
+    Image -->|No match| Fallback["Global or per-port fallback"]
+    Fallback -->|No match| Remembered["Remembered or newest listener"]
+    Single --> Route["Proxy to selected backend"]
+    Explicit -->|Match| Route
+    Browser -->|Match| Route
+    Caller -->|Match| Route
+    Cookie -->|Match| Route
+    Image -->|Match| Route
+    Fallback -->|Match| Route
+    Remembered --> Route
+
+    classDef selected fill:#eafbf4,stroke:#10b981,color:#0f172a;
+    classDef decision fill:#e8f1ff,stroke:#2563eb,color:#0f172a;
+    class Candidates,Explicit,Browser,Caller,Cookie,Image,Fallback,Remembered decision;
+    class Single,Route selected;
