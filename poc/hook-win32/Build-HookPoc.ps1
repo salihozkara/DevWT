@@ -43,7 +43,8 @@ if (-not $RuntimeOnly) {
         "cl $common /Fo:`"$artifacts\\`" /Fe:`"$artifacts\devwt-child-spawner.exe`" `"$src\devwt_child_spawner.cpp`"",
         "cl $common /Fo:`"$artifacts\\`" /Fe:`"$artifacts\devwt-env-probe.exe`" `"$src\devwt_env_probe.cpp`"",
         "cl $common /Fo:`"$artifacts\\`" /Fe:`"$artifacts\devwt-bind-probe.exe`" `"$src\devwt_bind_probe.cpp`" ws2_32.lib",
-        "cl $common /Fo:`"$artifacts\\`" /Fe:`"$artifacts\devwt-connect-probe.exe`" `"$src\devwt_connect_probe.cpp`" ws2_32.lib"
+        "cl $common /Fo:`"$artifacts\\`" /Fe:`"$artifacts\devwt-connect-probe.exe`" `"$src\devwt_connect_probe.cpp`" ws2_32.lib",
+        "cl $common /Fo:`"$artifacts\\`" /Fe:`"$artifacts\devwt-dns-probe.exe`" `"$src\devwt_dns_probe.cpp`" ws2_32.lib"
     )
 }
 

@@ -87,12 +87,12 @@ processes must use that directory.
 ## GitHub Release
 
 ```powershell
-git tag v0.1.0-preview.6
-git push origin v0.1.0-preview.6
-gh release create v0.1.0-preview.6 `
-  artifacts\installer\DevWT-v0.1.0-preview.6-installer.zip `
-  artifacts\installer\DevWT-v0.1.0-preview.6-installer.zip.sha256 `
-  --title "DevWT v0.1.0-preview.6" `
+git tag v0.1.0-preview.7
+git push origin v0.1.0-preview.7
+gh release create v0.1.0-preview.7 `
+  artifacts\installer\DevWT-v0.1.0-preview.7-installer.zip `
+  artifacts\installer\DevWT-v0.1.0-preview.7-installer.zip.sha256 `
+  --title "DevWT v0.1.0-preview.7" `
   --prerelease `
   --notes-file RELEASE_NOTES.md
 ```

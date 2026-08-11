@@ -1,7 +1,8 @@
-# DevWT v0.1.0-preview.6
+# DevWT v0.1.0-preview.7
 
-Public Windows preview with visual documentation, a checksum-verified
-latest-release installer, and the current context-aware browser workflow.
+Public Windows preview with a DNS pass-through fix for hooked IDE and application
+processes, a checksum-verified installer, and the current context-aware browser
+workflow.
 
 > [!WARNING]
 > This is an AI-developed MVP preview. The current codebase was written
@@ -9,13 +10,16 @@ latest-release installer, and the current context-aware browser workflow.
 > may change, and code quality, architecture, maintainability, documentation,
 > and test depth will continue to improve in future iterations.
 
-Preview.6 supersedes preview.5 and adds a self-update command. The complete
+Preview.7 supersedes preview.6 and keeps WinSock resolver functions untouched in
+port-shift mode. This prevents remote Git, database, and application hostname
+lookups from stalling while localhost port isolation remains active. The complete
 installer ZIP passes a no-remediation scan with current Microsoft Defender
 security intelligence before publication.
 
 ## Included
 
 - User-mode hook runtime for isolated localhost ports per worktree.
+- Port-shift DNS pass-through for IDE, Git, database, and application traffic.
 - Context-aware TCP/UDP gateway routing over IPv4 and IPv6.
 - Redesigned Web Console with Overview, Routing, Contexts, Activity, Tools, and
   Settings workspaces.
@@ -55,7 +59,7 @@ Invoke-WebRequest https://raw.githubusercontent.com/salihozkara/DevWT/main/insta
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\install-devwt.ps1
 ```
 
-Alternatively, extract `DevWT-v0.1.0-preview.6-installer.zip`, open PowerShell as
+Alternatively, extract `DevWT-v0.1.0-preview.7-installer.zip`, open PowerShell as
 Administrator in the extracted directory, and run:
 
 ```powershell

@@ -2349,13 +2349,13 @@ static FARPROC WINAPI HookGetProcAddress(HMODULE module, LPCSTR name)
             return reinterpret_cast<FARPROC>(&HookGetSockName);
         }
 
-        if (_stricmp(name, "getaddrinfo") == 0 || _stricmp(name, "GetAddrInfoA") == 0)
+        if (!g_hasPortOffset && (_stricmp(name, "getaddrinfo") == 0 || _stricmp(name, "GetAddrInfoA") == 0))
         {
             g_realGetAddrInfoA = reinterpret_cast<GetAddrInfoAFn>(real);
             return reinterpret_cast<FARPROC>(&HookGetAddrInfoA);
         }
 
-        if (_stricmp(name, "GetAddrInfoW") == 0)
+        if (!g_hasPortOffset && _stricmp(name, "GetAddrInfoW") == 0)
         {
             g_realGetAddrInfoW = reinterpret_cast<GetAddrInfoWFn>(real);
             return reinterpret_cast<FARPROC>(&HookGetAddrInfoW);
@@ -2411,12 +2411,12 @@ static void RewriteProcedureLookup(HMODULE module, const char *name, WORD ordina
         g_realGetSockName = reinterpret_cast<GetSockNameFn>(*address);
         *address = reinterpret_cast<void *>(&HookGetSockName);
     }
-    else if (!g_childrenOnlyMode && isWs2 && byName && (_stricmp(name, "getaddrinfo") == 0 || _stricmp(name, "GetAddrInfoA") == 0))
+    else if (!g_childrenOnlyMode && !g_hasPortOffset && isWs2 && byName && (_stricmp(name, "getaddrinfo") == 0 || _stricmp(name, "GetAddrInfoA") == 0))
     {
         g_realGetAddrInfoA = reinterpret_cast<GetAddrInfoAFn>(*address);
         *address = reinterpret_cast<void *>(&HookGetAddrInfoA);
     }
-    else if (!g_childrenOnlyMode && isWs2 && byName && _stricmp(name, "GetAddrInfoW") == 0)
+    else if (!g_childrenOnlyMode && !g_hasPortOffset && isWs2 && byName && _stricmp(name, "GetAddrInfoW") == 0)
     {
         g_realGetAddrInfoW = reinterpret_cast<GetAddrInfoWFn>(*address);
         *address = reinterpret_cast<void *>(&HookGetAddrInfoW);
@@ -2519,12 +2519,12 @@ static void EnsureRealWinsockFunctions()
                 InstallInlinePatch(&g_getSockNamePatch, reinterpret_cast<void *>(g_realGetSockName), reinterpret_cast<void *>(&HookGetSockName));
             }
 
-            if (g_realGetAddrInfoA)
+            if (!g_hasPortOffset && g_realGetAddrInfoA)
             {
                 InstallInlinePatch(&g_getAddrInfoAPatch, reinterpret_cast<void *>(g_realGetAddrInfoA), reinterpret_cast<void *>(&HookGetAddrInfoA));
             }
 
-            if (g_realGetAddrInfoW)
+            if (!g_hasPortOffset && g_realGetAddrInfoW)
             {
                 InstallInlinePatch(&g_getAddrInfoWPatch, reinterpret_cast<void *>(g_realGetAddrInfoW), reinterpret_cast<void *>(&HookGetAddrInfoW));
             }
@@ -2691,11 +2691,11 @@ static void PatchModuleImports(HMODULE module)
             {
                 replacement = reinterpret_cast<void *>(&HookGetSockName);
             }
-            else if (isWs2 && (_stricmp(functionName, "getaddrinfo") == 0 || _stricmp(functionName, "GetAddrInfoA") == 0))
+            else if (!g_hasPortOffset && isWs2 && (_stricmp(functionName, "getaddrinfo") == 0 || _stricmp(functionName, "GetAddrInfoA") == 0))
             {
                 replacement = reinterpret_cast<void *>(&HookGetAddrInfoA);
             }
-            else if (isWs2 && _stricmp(functionName, "GetAddrInfoW") == 0)
+            else if (!g_hasPortOffset && isWs2 && _stricmp(functionName, "GetAddrInfoW") == 0)
             {
                 replacement = reinterpret_cast<void *>(&HookGetAddrInfoW);
             }
